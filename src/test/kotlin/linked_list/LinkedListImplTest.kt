@@ -12,7 +12,7 @@ class LinkedListImplTest {
         val linkedListImpl = LinkedListImpl<Int>()
         val addedItem = 5
         Assert.assertEquals(addedItem, linkedListImpl.add(addedItem))
-        Assert.assertTrue(linkedListImpl.getSize() >= 1)
+        Assert.assertTrue(linkedListImpl.size() >= 1)
     }
 
     @Test
@@ -23,7 +23,7 @@ class LinkedListImplTest {
     }
 
     @Test(expected = IllegalStateException::class)
-    fun `test, get item from empty list`() {
+    fun `test, get item from empty linked linked list`() {
         val linkedListImpl = LinkedListImpl<Int>()
         linkedListImpl.get(0)
     }
@@ -42,7 +42,7 @@ class LinkedListImplTest {
         val addedItem = 1
         Assert.assertTrue(addedItem == linkedListImpl.add(addedItem))
         Assert.assertTrue(addedItem == linkedListImpl.delete(0))
-        Assert.assertTrue(linkedListImpl.getSize() < 1)
+        Assert.assertTrue(linkedListImpl.size() < 1)
     }
 
     @Test(expected = IllegalStateException::class)
@@ -60,7 +60,7 @@ class LinkedListImplTest {
         val addedItem2 = 2
         Assert.assertTrue(addedItem == linkedListImpl.add(addedItem))
         Assert.assertTrue(addedItem2 == linkedListImpl.add(addedItem2))
-        Assert.assertTrue(linkedListImpl.getSize() >= 2)
+        Assert.assertTrue(linkedListImpl.size() >= 2)
         Assert.assertTrue(linkedListImpl.delete(0) == addedItem)
         Assert.assertTrue(linkedListImpl.delete(0) == addedItem2)
     }
@@ -86,7 +86,7 @@ class LinkedListImplTest {
         linkedListImpl.add(addedItem)
         linkedListImpl.add(addedItem)
         linkedListImpl.clearAll()
-        Assert.assertTrue(linkedListImpl.getSize() == 0)
+        Assert.assertTrue(linkedListImpl.size() == 0)
     }
 
     @Test(expected = IllegalStateException::class)
@@ -108,7 +108,7 @@ class LinkedListImplTest {
         repeat(200) {
             linkedListImpl.add(addedItem)
         }
-        Assert.assertTrue(linkedListImpl.getSize() == 200)
+        Assert.assertTrue(linkedListImpl.size() == 200)
         repeat(199) {
             Assert.assertTrue(linkedListImpl.get(it) == addedItem)
         }
@@ -130,7 +130,7 @@ class LinkedListImplTest {
     }
 
     @Test
-    fun `test, is contains some item in the list, should return true`() {
+    fun `test, is contains some item in the linked list, should return true`() {
         val linkedListImpl = LinkedListImpl<Int>()
         val addedItem = 1
         linkedListImpl.add(addedItem)
@@ -138,7 +138,7 @@ class LinkedListImplTest {
     }
 
     @Test
-    fun `test, is contains some item in the list, should return false 'cause item is not in the list`() {
+    fun `test, is contains some item in the linked list, should return false 'cause item is not in the linked list`() {
         val linkedListImpl = LinkedListImpl<Int>()
         val addedItem = 1
         linkedListImpl.add(999)
@@ -153,6 +153,42 @@ class LinkedListImplTest {
             linkedListImpl.add(addedItem)
         }
         assertTrue(linkedListImpl.contains(addedItem))
+    }
+
+    @Test
+    fun `test, to list, should return simple list with the same items`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        repeat(100) {
+            linkedListImpl.add(it)
+        }
+        val linkedSize = linkedListImpl.size()
+        val simpleList: List<Int> = linkedListImpl.toList()
+        repeat(100) {
+            assertEquals(simpleList[it - 1], it)
+        }
+        assertEquals(linkedSize, simpleList.size)
+    }
+
+    @Test
+    fun `test, to list, should return empty list 'cause there is a empty linked list`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val emptyList: List<Int> = linkedListImpl.toList()
+        assertEquals(emptyList.size, 0)
+        assertEquals(linkedListImpl.size(), 0)
+    }
+
+    @Test
+    fun `test, to list, add items after this call to list twice`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        repeat(2) {
+            repeat(100) {
+                linkedListImpl.add(it)
+            }
+            val list: List<Int> = linkedListImpl.toList()
+            repeat(100) {
+                assertEquals(list[it - 1], it)
+            }
+        }
     }
 
 }

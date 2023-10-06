@@ -7,6 +7,6 @@ interface LinkedListInt<T> {
     fun delete(index: Int): T?
     fun clearAll()
     fun contains(item: T): Boolean
-    fun getSize(): Int
+    fun size(): Int
 
 }

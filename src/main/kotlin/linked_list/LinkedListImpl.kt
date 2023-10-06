@@ -82,6 +82,6 @@ class LinkedListImpl<T>: LinkedListInt<T> {
         return false
     }
 
-    override fun getSize() = size
+    override fun size() = size
 
 }
