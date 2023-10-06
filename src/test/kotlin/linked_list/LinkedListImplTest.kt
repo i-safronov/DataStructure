@@ -57,7 +57,7 @@ class LinkedListImplTest {
         val addedItem = 1
         val addedItem2 = 2
         Assert.assertTrue(addedItem == linkedListImpl.add(addedItem))
-        Assert.assertTrue(addedItem == linkedListImpl.add(addedItem2))
+        Assert.assertTrue(addedItem2 == linkedListImpl.add(addedItem2))
         Assert.assertTrue(linkedListImpl.getSize() >= 2)
         Assert.assertTrue(linkedListImpl.delete(0) == addedItem)
         Assert.assertTrue(linkedListImpl.delete(0) == addedItem2)
