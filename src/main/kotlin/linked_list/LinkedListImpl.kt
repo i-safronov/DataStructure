@@ -82,6 +82,18 @@ class LinkedListImpl<T>: LinkedListInt<T> {
         return false
     }
 
+    override fun toList(): List<T> {
+        val mutableList = mutableListOf<T>()
+        var currentItem = head
+
+        while (currentItem != null) {
+            mutableList.add(currentItem.data)
+            currentItem = currentItem.next
+        }
+
+        return mutableList
+    }
+
     override fun size() = size
 
 }

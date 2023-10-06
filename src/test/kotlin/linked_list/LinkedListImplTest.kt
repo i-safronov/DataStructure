@@ -164,7 +164,7 @@ class LinkedListImplTest {
         val linkedSize = linkedListImpl.size()
         val simpleList: List<Int> = linkedListImpl.toList()
         repeat(100) {
-            assertEquals(simpleList[it - 1], it)
+            assertEquals(simpleList[it], it)
         }
         assertEquals(linkedSize, simpleList.size)
     }
@@ -186,7 +186,7 @@ class LinkedListImplTest {
             }
             val list: List<Int> = linkedListImpl.toList()
             repeat(100) {
-                assertEquals(list[it - 1], it)
+                assertEquals(list[it], it)
             }
         }
     }
