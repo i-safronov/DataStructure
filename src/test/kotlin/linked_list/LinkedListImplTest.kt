@@ -191,4 +191,17 @@ class LinkedListImplTest {
         }
     }
 
+    @Test
+    fun `test, is empty, should return false 'cause linked list is not empty`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        linkedListImpl.add(1)
+        assertTrue(!linkedListImpl.isEmpty())
+    }
+
+    @Test
+    fun `test, is empty, should return true 'cause linked list is empty`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        assertTrue(linkedListImpl.isEmpty())
+    }
+
 }
