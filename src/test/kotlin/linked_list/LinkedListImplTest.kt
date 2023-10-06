@@ -10,7 +10,7 @@ class LinkedListImplTest {
         val linkedListImpl = LinkedListImpl<Int>()
         val addedItem = 5
         Assert.assertEquals(addedItem, linkedListImpl.add(addedItem))
-        Assert.assertTrue(linkedListImpl.size >= 1)
+        Assert.assertTrue(linkedListImpl.getSize() >= 1)
     }
 
     @Test
@@ -40,7 +40,7 @@ class LinkedListImplTest {
         val addedItem = 1
         Assert.assertTrue(addedItem == linkedListImpl.add(addedItem))
         Assert.assertTrue(addedItem == linkedListImpl.delete(0))
-        Assert.assertTrue(linkedListImpl.size < 1)
+        Assert.assertTrue(linkedListImpl.getSize() < 1)
     }
 
     @Test(expected = IllegalStateException::class)
