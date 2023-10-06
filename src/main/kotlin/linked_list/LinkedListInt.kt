@@ -8,6 +8,7 @@ interface LinkedListInt<T> {
     fun clearAll()
     fun contains(item: T): Boolean
     fun toList(): List<T>
+    fun isEmpty(): Boolean
     fun size(): Int
 
 }

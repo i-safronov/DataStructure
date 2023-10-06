@@ -94,6 +94,10 @@ class LinkedListImpl<T>: LinkedListInt<T> {
         return mutableList
     }
 
+    override fun isEmpty(): Boolean {
+        return head == null
+    }
+
     override fun size() = size
 
 }
