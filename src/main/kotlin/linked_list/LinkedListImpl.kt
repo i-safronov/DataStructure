@@ -71,6 +71,17 @@ class LinkedListImpl<T>: LinkedListInt<T> {
         size = 0
     }
 
-    fun getSize() = size
+    override fun contains(item: T): Boolean {
+        var currentItem = head
+        while (currentItem != null) {
+            if (currentItem.data == item) {
+                return true
+            }
+            currentItem = currentItem.next
+        }
+        return false
+    }
+
+    override fun getSize() = size
 
 }
