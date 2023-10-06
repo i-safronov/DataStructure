@@ -24,7 +24,21 @@ class LinkedListImpl<T>: LinkedListInt<T> {
     }
 
     override fun get(index: Int): T {
-        TODO("Not yet implemented")
+        if (index <= size - 1 && index >= 0 && head != null) {
+            var count = 0
+            var currentItem = head
+            while (currentItem != null) {
+                if (count == index) {
+                    return currentItem.data
+                } else {
+                    currentItem = currentItem.next
+                    ++count
+                }
+            }
+            throw IllegalStateException("No item found for this index: $index")
+        } else {
+            throw IllegalStateException("Index is out of available area,\nindex: $index, size: ${size - 1}")
+        }
     }
 
     override fun delete(index: Int): T {
