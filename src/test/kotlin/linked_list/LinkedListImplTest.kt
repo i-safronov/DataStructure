@@ -2,6 +2,7 @@ package linked_list
 
 import org.junit.Assert
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class LinkedListImplTest {
 
@@ -73,6 +74,58 @@ class LinkedListImplTest {
         linkedListImpl.add(addedItem)
         Assert.assertTrue(linkedListImpl.get(0) == addedItem)
         Assert.assertTrue(linkedListImpl.delete(0) == addedItem)
+    }
+
+    @Test
+    fun `test clear all items, should delete all items`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedItem = 1
+        linkedListImpl.add(addedItem)
+        linkedListImpl.add(addedItem)
+        linkedListImpl.add(addedItem)
+        linkedListImpl.add(addedItem)
+        linkedListImpl.clearAll()
+        Assert.assertTrue(linkedListImpl.getSize() == 0)
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun `test get item after clear all items, should throw exception`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedItem = 1
+        linkedListImpl.add(addedItem)
+        linkedListImpl.add(addedItem)
+        linkedListImpl.add(addedItem)
+        linkedListImpl.add(addedItem)
+        linkedListImpl.clearAll()
+        linkedListImpl.get(0)
+    }
+
+    @Test
+    fun `test add too much items, should get item at some position without null`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedItem = 1
+        repeat(200) {
+            linkedListImpl.add(addedItem)
+        }
+        Assert.assertTrue(linkedListImpl.getSize() == 200)
+        repeat(199) {
+            Assert.assertTrue(linkedListImpl.get(it) == addedItem)
+        }
+    }
+
+    @Test
+    fun `test add items after that get all items and delete all items twice, should works correctly`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedItem = 1
+        for (i in 0 .. 1) {
+            repeat(200) {
+                linkedListImpl.add(addedItem)
+            }
+            repeat(199) {
+                assertEquals(linkedListImpl.get(it), addedItem)
+            }
+            linkedListImpl.clearAll()
+        }
     }
 
 }

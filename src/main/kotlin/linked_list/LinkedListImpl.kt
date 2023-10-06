@@ -68,6 +68,7 @@ class LinkedListImpl<T>: LinkedListInt<T> {
 
     override fun clearAll() {
         head = null
+        size = 0
     }
 
     fun getSize() = size
