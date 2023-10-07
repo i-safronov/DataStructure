@@ -66,6 +66,30 @@ class LinkedListImpl<T>: LinkedListInt<T> {
         }
     }
 
+    /**
+     * Removes the first occurrence of the specified element from this list,
+     * if it is present.  If this list does not contain the element, it is
+     * unchanged. **/
+    override fun deleteItem(item: T): Boolean {
+        return if (contains(item)) {
+            var currentItem = head
+            if (head?.data == item) {
+                head = head?.next
+            } else {
+                while (currentItem?.next != null) {
+                    if (currentItem.next?.data == item) {
+                        currentItem.next = currentItem.next?.next
+                    } else {
+                        currentItem = currentItem.next
+                    }
+                }
+            }
+            true
+        } else {
+            false
+        }
+    }
+
     override fun clearAll() {
         head = null
         size = 0
