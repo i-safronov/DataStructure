@@ -204,4 +204,32 @@ class LinkedListImplTest {
         assertTrue(linkedListImpl.isEmpty())
     }
 
+    @Test
+    fun `test, delete item, should delete all items with the same data and return deleted item`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedItem = 1
+        repeat(4) {
+            linkedListImpl.add(it)
+        }
+        linkedListImpl.add(addedItem)
+        val value: Boolean = linkedListImpl.deleteItem(addedItem)
+        assertTrue(!linkedListImpl.contains(addedItem))
+        assertTrue(value)
+    }
+
+    @Test
+    fun `test, delete item, should return false 'cause linked list does not have the same item`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        repeat(4) {
+            linkedListImpl.add(it)
+        }
+        assertTrue(!linkedListImpl.deleteItem(999))
+    }
+
+    @Test
+    fun `test, delete item, should return false 'cause linked list is empty`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        assertTrue(!linkedListImpl.deleteItem(999))
+    }
+
 }
