@@ -232,4 +232,48 @@ class LinkedListImplTest {
         assertTrue(!linkedListImpl.deleteItem(999))
     }
 
+    @Test
+    fun `test, add at, should add item at some index`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedPosition = linkedListImpl.size() - 1
+        val addedItem = 999
+        repeat(20) {
+            linkedListImpl.add(it)
+        }
+        linkedListImpl.addAt(addedPosition, addedItem)
+        assertEquals(addedItem, linkedListImpl.get(addedPosition))
+        assertTrue(linkedListImpl.size() >= 20)
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun `test, add at, should throw exception 'cause index is out of linked list`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedPosition = 100302
+        val addedItem = 999
+        repeat(20) {
+            linkedListImpl.add(it)
+        }
+        linkedListImpl.addAt(addedPosition, addedItem)
+    }
+
+    @Test
+    fun `test, add at, add item at 0 index when linked list is empty`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedPosition = 0
+        val addedItem = 1337
+        linkedListImpl.addAt(addedPosition, addedItem)
+        assertEquals(addedItem, linkedListImpl.get(addedPosition))
+        assertTrue(linkedListImpl.size() > 0)
+    }
+
+    @Test
+    fun `test, add at, add item at 9 index when linked list is empty`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedPosition = 9
+        val addedItem = 1337
+        linkedListImpl.addAt(addedPosition, addedItem)
+        assertEquals(addedItem, linkedListImpl.get(0))
+        assertTrue(linkedListImpl.size() > 0)
+    }
+
 }
