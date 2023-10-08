@@ -235,11 +235,11 @@ class LinkedListImplTest {
     @Test
     fun `test, add at, should add item at some index`() {
         val linkedListImpl = LinkedListImpl<Int>()
-        val addedPosition = linkedListImpl.size() - 1
         val addedItem = 999
         repeat(20) {
             linkedListImpl.add(it)
         }
+        val addedPosition = linkedListImpl.size() - 1
         linkedListImpl.addAt(addedPosition, addedItem)
         assertEquals(addedItem, linkedListImpl.get(addedPosition))
         assertTrue(linkedListImpl.size() >= 20)
@@ -248,8 +248,8 @@ class LinkedListImplTest {
     @Test(expected = IllegalStateException::class)
     fun `test, add at, should throw exception 'cause index is out of linked list`() {
         val linkedListImpl = LinkedListImpl<Int>()
-        val addedPosition = 100302
         val addedItem = 999
+        val addedPosition = 100302
         repeat(20) {
             linkedListImpl.add(it)
         }
@@ -266,7 +266,7 @@ class LinkedListImplTest {
         assertTrue(linkedListImpl.size() > 0)
     }
 
-    @Test
+    @Test(expected = IllegalStateException::class)
     fun `test, add at, add item at 9 index when linked list is empty`() {
         val linkedListImpl = LinkedListImpl<Int>()
         val addedPosition = 9
@@ -274,6 +274,44 @@ class LinkedListImplTest {
         linkedListImpl.addAt(addedPosition, addedItem)
         assertEquals(addedItem, linkedListImpl.get(0))
         assertTrue(linkedListImpl.size() > 0)
+    }
+
+    @Test
+    fun `test, add at, add item in the center of the linked list`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedItem = 8392
+        repeat(100) {
+            linkedListImpl.add(it)
+        }
+        val position = 50
+        linkedListImpl.addAt(position, addedItem)
+        assertEquals(addedItem, linkedListImpl.get(position))
+        assertTrue(linkedListImpl.size() >= 100)
+    }
+
+    @Test
+    fun `test, add at, add item in the end of the linked list`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        val addedItem = 8392
+        repeat(100) {
+            linkedListImpl.add(it)
+        }
+        val position = linkedListImpl.size() - 1
+        linkedListImpl.addAt(position, addedItem)
+        assertEquals(addedItem, linkedListImpl.get(position))
+        assertTrue(linkedListImpl.size() >= 100)
+    }
+
+    @Test
+    fun `test, add at, add item by cycle from 0 to 100`() {
+        val linkedListImpl = LinkedListImpl<Int>()
+        repeat(100) {
+            linkedListImpl.addAt(it, it)
+        }
+        repeat(100) {
+            assertEquals(it, linkedListImpl.get(it))
+        }
+        assertTrue(linkedListImpl.size() >= 100)
     }
 
 }

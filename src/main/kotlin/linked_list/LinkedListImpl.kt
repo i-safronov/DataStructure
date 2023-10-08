@@ -23,6 +23,29 @@ class LinkedListImpl<T>: LinkedListInt<T> {
         }
     }
 
+    override fun addAt(index: Int, item: T): T {
+        return if (index == 0) {
+            val newHead = LinkedListNode(item, head)
+            head = newHead
+            size++
+            item
+        } else {
+            var currentItem = head
+            var count = 1
+            while (currentItem != null) {
+                if (count == index) {
+                    val newItem = LinkedListNode(item, currentItem.next?.next)
+                    currentItem.next = newItem
+                    size++
+                    return item
+                }
+                currentItem = currentItem.next
+                count++
+            }
+            throw IllegalStateException("Failed to save element: ${item} to this position: ${index}")
+        }
+    }
+
     override fun get(index: Int): T {
         if (index <= size - 1 && index >= 0 && head != null) {
             var count = 0
