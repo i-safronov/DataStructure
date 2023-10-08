@@ -1,9 +1,4 @@
-import java.util.LinkedList
 
 fun main(args: Array<String>) {
-    LinkedList<Int>()
-    println("Hello World!")
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    val queue: ArrayDeque<Int> = ArrayDeque<Int>()
 }
