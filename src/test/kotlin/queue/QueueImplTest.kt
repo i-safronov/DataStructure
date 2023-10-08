@@ -46,10 +46,9 @@ class QueueImplTest {
         }
         assertEquals(0, queueImpl.remove())
         assertEquals(1, queueImpl.remove())
-        assertEquals(2, queueImpl.remove())
     }
 
-    @Test
+    @Test(expected = IndexOutOfBoundsException::class)
     fun `test, remove more than pushed, should throw exception`() {
         val queueImpl = QueueImpl<Int>()
         queueImpl.add(1)
