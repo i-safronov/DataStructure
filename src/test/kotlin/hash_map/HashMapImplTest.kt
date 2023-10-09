@@ -55,7 +55,7 @@ class HashMapImplTest {
 
     @Test
     fun `test, add new item, should change hash map size`() {
-        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl<Int, Int>()
+        val hashMapImpl: HashMapInt<String, Int> = HashMapImpl<String, Int>()
         hashMapImpl.add("Hello", 5)
         assertTrue(hashMapImpl.size() != 0)
     }
@@ -68,7 +68,7 @@ class HashMapImplTest {
 
     @Test
     fun `test, size changing, should size increments when adding elements`() {
-        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl<Int, Int>()
+        val hashMapImpl: HashMapInt<String, Int> = HashMapImpl<String, Int>()
         hashMapImpl.add("Hello", 5)
         assertTrue(1 == hashMapImpl.size())
         hashMapImpl.add("Goodbye", 5)
@@ -77,29 +77,29 @@ class HashMapImplTest {
 
     @Test(expected = IllegalStateException::class)
     fun `test, get item by key that's not exists, should throw exception`() {
-        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl<Int, Int>()
+        val hashMapImpl: HashMapInt<String, Int> = HashMapImpl<String, Int>()
         assertTrue(hashMapImpl.get("ajsldkfjklas") == null)
     }
 
     @Test
     fun `test, add item by the same hash code, should not overwrite items`() {
-        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl<Int, Int>()
-        hashMapImpl.put("Ea", 5)
-        hashMapImpl.put("FB", 6)
+        val hashMapImpl: HashMapInt<String, Int> = HashMapImpl<String, Int>()
+        hashMapImpl.add("Ea", 5)
+        hashMapImpl.add("FB", 6)
         assertEquals(5, hashMapImpl.get("Ea"))
         assertEquals(6, hashMapImpl.get("FB"))
     }
 
     @Test(expected = IllegalStateException::class)
     fun `test, remove item that's not exists, should throw exception`() {
-        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl<Int, Int>()
+        val hashMapImpl: HashMapInt<String, Int> = HashMapImpl<String, Int>()
         hashMapImpl.remove("Hello")
         assertEquals(0, hashMapImpl.size())
     }
 
     @Test
     fun `test, remove items, should decrement size and delete item`() {
-        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl<Int, Int>()
+        val hashMapImpl: HashMapInt<String, Int> = HashMapImpl<String, Int>()
         hashMapImpl.add("Hello", 5)
         hashMapImpl.add("Goodbye", 6)
         hashMapImpl.remove("Hello")

@@ -1,3 +1,4 @@
 fun main(args: Array<String>) {
-    val queue: ArrayDeque<Int> = ArrayDeque<Int>()
+    val t: Int = "asdfa".hashCode() and 16
+    println("Result is: ${t}")
 }
