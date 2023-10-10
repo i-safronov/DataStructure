@@ -136,4 +136,13 @@ class HashMapImplTest {
         assertEquals(199, hashMapImpl.get(key))
     }
 
+    @Test
+    fun `test, change size when adding items check, should increment size after added item`() {
+        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl()
+        repeat(100) {
+            assertEquals(it, hashMapImpl.add(it, it))
+        }
+        assertTrue(hashMapImpl.size() >= 100)
+    }
+
 }
