@@ -145,4 +145,25 @@ class HashMapImplTest {
         assertTrue(hashMapImpl.size() >= 100)
     }
 
+    @Test
+    fun `test, remove first item, should return removed item`() {
+        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl()
+        val addedItem = 1
+        assertEquals(addedItem, hashMapImpl.add(1, addedItem))
+        assertTrue(hashMapImpl.size() >= 1)
+        assertEquals(addedItem, hashMapImpl.remove(1))
+        assertTrue(hashMapImpl.size() < 1)
+    }
+
+    @Test
+    fun `test, remove last item, should return removed item`() {
+        val hashMapImpl: HashMapInt<Int, Int> = HashMapImpl()
+        val addedItem = 2
+        assertEquals(1, hashMapImpl.add(1, 1))
+        assertEquals(addedItem, hashMapImpl.add(2, addedItem))
+        assertTrue(hashMapImpl.size() >= 2)
+        assertEquals(addedItem, hashMapImpl.remove(2))
+        assertTrue(hashMapImpl.size() <= 1)
+    }
+
 }

@@ -3,16 +3,12 @@ package hash_map
 import hash_map.model.HashMapItem
 import linked_list.data.LinkedListNode
 
-/*
-* 5 and 5 - побитовое сложение между 5 и 5
-* */
-
 class HashMapImpl<K, V>: HashMapInt<K, V> {
 
-    private var maxSize = 16
+    private var maxSize = 15
     private var size = 0
     private var loadFactor = 0.75F
-    private var items = Array<LinkedListNode<HashMapItem<K, V>>?>(maxSize) {
+    private var items = Array<LinkedListNode<HashMapItem<K, V>>?>(maxSize + 1) {
         null
     }
 
@@ -35,7 +31,9 @@ class HashMapImpl<K, V>: HashMapInt<K, V> {
     }
 
     override fun remove(key: K): V? {
-        TODO("Not yet implemented")
+        val hashCode = key.hashCode()
+        val index = getIndex(hashCode)
+        return removeItemByIndexAndKey(index = index, key = key)
     }
 
     override fun size(): Int {
@@ -48,7 +46,7 @@ class HashMapImpl<K, V>: HashMapInt<K, V> {
 
     private fun resize() {
         maxSize *= 2
-        val newArray = Array<LinkedListNode<HashMapItem<K, V>>?>(maxSize) { null  }
+        val newArray = Array<LinkedListNode<HashMapItem<K, V>>?>(maxSize + 1) { null  }
         items.forEachIndexed { index, hashMapItem ->
             newArray[index] = hashMapItem
         }
@@ -81,14 +79,34 @@ class HashMapImpl<K, V>: HashMapInt<K, V> {
     }
 
     private fun getItem(index: Int, key: K): V? {
-        var currentItem: LinkedListNode<HashMapItem<K, V>>? = items[index]
+        val currentItem: LinkedListNode<HashMapItem<K, V>>? = items[index]
         while (currentItem != null) {
             if (currentItem.data.key == key) return currentItem.data.value
             else {
                 currentItem.data = currentItem.next?.data!!
             }
         }
-        return null
+        throw IllegalStateException("Item didn't found, make sure that you set the correct key, key: $key")
+    }
+
+    private fun removeItemByIndexAndKey(index: Int, key: K): V? {
+        if (items[index]?.data?.key == key) {
+            val oldData = items[index]?.data?.value
+            items[index] = items[index]?.next
+            size--
+            return oldData
+        } else {
+            val currentItem = items[index]
+            while (currentItem?.next != null) {
+                if (currentItem.next?.data?.key == key) {
+                    val oldData = currentItem.next?.data?.value
+                    currentItem.next = currentItem.next?.next
+                    size--
+                    return oldData
+                }
+            }
+        }
+        throw IllegalStateException("Item didn't found, make sure that you set the correct key, key: $key")
     }
 
 }
